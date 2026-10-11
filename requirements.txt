@@ -1,0 +1,45 @@
+# Lab environment for this course.
+#
+# Every lab except Day 3's DPO lab needs an NVIDIA GPU (five need an A100), so
+# this is a CUDA environment, not the template's CPU-only stack. Several
+# packages (flash-linear-attention, unsloth, vllm) only install on Linux with
+# CUDA. Each notebook also installs what it needs in its first cells, so on
+# Colab nothing here is required.
+#
+# The base stack is pinned to minor versions so a wheelhouse built weeks before
+# the course installs the same thing on the day. torch is left unpinned because
+# vllm and unsloth each require a specific release. See OFFLINE.md for the
+# `pip download` / `--no-index` offline install.
+
+numpy~=2.1
+pandas~=2.2
+matplotlib~=3.9
+tqdm
+
+jupyterlab~=4.2
+ipywidgets~=8.1
+
+torch
+transformers
+datasets
+huggingface_hub
+accelerate
+safetensors
+peft
+trl
+
+flash-linear-attention[cuda]   # Day 1: Gated DeltaNet
+math-verify[antlr4_13_2]       # Day 2: exact grading of math answers
+sympy                          # Day 2
+unsloth                        # Day 3: GRPO
+vllm                           # Day 3: GRPO sampling
+mcp>=1.10,<2                   # Day 4: MCP server and client
+smolagents[mcp,transformers]   # Day 4: tool-calling agent
+jsonschema                     # Day 4
+nest_asyncio                   # Day 4
+sae-lens                       # Day 5: sparse autoencoders
+
+# Day 2's search lab also installs tree-of-thoughts-llm with --no-deps, for its
+# prompts and the Game of 24 puzzle file. A requirements file cannot say
+# --no-deps, so run that one by hand:
+#   pip install --no-deps tree-of-thoughts-llm

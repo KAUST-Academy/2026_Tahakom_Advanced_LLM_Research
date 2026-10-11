@@ -1,0 +1,327 @@
+# =============================================================================
+# Advanced LLM Research and Next-Generation NLP — course content
+# One week at KAUST for Tahakom's LLM research team.
+#
+# This file is the single source of truth for the website. Edit it, run
+# `python3 build.py --check`, and every page is regenerated. Never edit the
+# generated HTML in _site/ — it is deleted and rebuilt every time.
+#
+# Resource `status`:
+#   todo   -> renders greyed out as "Coming soon", not linked, not checked.
+#   ready  -> renders as a button; `file` must exist or --check fails the build.
+#
+# The decks are NLP 26 to 30 of the KAUST Academy course library
+# (Artificial-Intelligence-Courses, Lectures/Natural_Language_Processing/), one
+# per day, and the labs come from its Labs/ folder. README.md has the details.
+# =============================================================================
+
+[course]
+title      = "Advanced LLM Research and Next-Generation NLP"
+title_lead = "Advanced LLM Research"
+title_rest = "and Next-Generation NLP"
+
+tagline  = "A one-week research course at KAUST on the frontier of language modeling beyond transformers: emerging architectures, advanced reasoning, alignment, agentic models and interpretability, for practitioners working with LLMs."
+client   = "Tahakom"
+provider = "KAUST Academy"
+year     = "2026"
+
+# The dates are not fixed yet. Add them here (YYYY-MM-DD) once they are.
+# starts = ""
+# ends   = ""
+location = "KAUST"
+
+# Drives the footer licence link and the Colab URL pattern below.
+repo         = "KAUST-Academy/2026_Tahakom_Advanced_LLM_Research"
+
+license      = "GPL-3.0"
+license_note = "Recording and uploading lectures online is not permitted."
+
+# Shown under the "Course Overview" heading on the home page.
+summary = """
+Five days, each built around one lecture deck and one or two hands-on labs,
+ending with an end-to-end enterprise capstone. The decks start where an advanced
+NLP course ends, and each lists the background it assumes on its learning
+outcomes slide. Five of the nine labs need an A100 GPU; the others run on a T4
+or a CPU.
+"""
+
+# -----------------------------------------------------------------------------
+# Overview — the "Course Overview" section of the home page, from the syllabus.
+# Delete this table and its [[overview.prerequisites]] blocks to drop the
+# section.
+# -----------------------------------------------------------------------------
+
+[overview]
+objectives = [
+  "Critically compare emerging architectures (state-space models, linear attention and hybrid designs) against transformer baselines",
+  "Analyze Mixture-of-Experts routing, expert balancing and efficient attention mechanisms at frontier scale",
+  "Apply test-time compute scaling, Monte Carlo Tree Search, process reward models, and verifier-based evaluation with symbolic reasoning and formal verification to advance LLM reasoning",
+  "Evaluate post-RLHF alignment methods (DPO, ORPO, IPO, KTO, SimPO, GRPO) and scalable oversight strategies",
+  "Design synthetic data generation, continual post-training and self-improvement pipelines",
+  "Architect agentic foundation models with persistent memory, tool learning and multi-agent protocols",
+  "Investigate efficiency frontiers, including speculative decoding, model compression and small language models",
+  "Apply mechanistic interpretability and uncertainty estimation methods to safety and hallucination research",
+  "Assess the current frontier model landscape and formulate open research questions and future directions",
+  "Deliver an end-to-end enterprise LLM capstone spanning fine-tuning, evaluation and deployment",
+]
+capstone = """
+The course concludes with an end-to-end enterprise LLM capstone project covering
+fine-tuning, evaluation and deployment.
+"""
+
+  [[overview.prerequisites]]
+  topic  = "Programming"
+  detail = "PyTorch, including custom model implementation and distributed training"
+
+  [[overview.prerequisites]]
+  topic  = "Foundations"
+  detail = "Linear algebra, probability and optimization, and reading and critically assessing machine learning research papers"
+
+  [[overview.prerequisites]]
+  topic  = "Domain knowledge"
+  detail = "Advanced natural language processing and large language models, including transformer internals, attention mechanisms, and pre-training and post-training pipelines"
+
+  [[overview.prerequisites]]
+  topic  = "Specialized topics"
+  detail = "Fine-tuning and aligning LLMs (SFT, LoRA, RLHF or DPO); retrieval-augmented generation and agentic patterns (tool use, orchestration); and LLM evaluation and inference serving (benchmarks, LLM-as-a-judge, vLLM)"
+
+  [[overview.prerequisites]]
+  topic  = "Tools and infrastructure"
+  detail = "Multi-GPU compute environments"
+
+# -----------------------------------------------------------------------------
+# Days
+#
+# `topics` is the day's syllabus, shown in a box above its resource table.
+# Labs are numbered in the order they are run; rows marked "Optional" are
+# extension material. Each lab row says what GPU it needs.
+#
+# Colab URLs: https://colab.research.google.com/github/<repo>/blob/main/<path>
+# -----------------------------------------------------------------------------
+
+[[days]]
+slug  = "day1"
+label = "Day 1"
+title = "Next-Generation Foundation Model Architectures"
+blurb = "What is replacing, sparsifying and stretching the transformer: state-space models, linear attention and hybrids, mixture of experts, efficient and long-context attention, scaling laws and multimodal designs."
+icon  = "ri-stack-line"
+topics = [
+  "Evolution beyond Transformers: Mamba, Mamba-2, RWKV, Hyena, xLSTM, and hybrid architectures",
+  "State-space models (SSMs) and linear attention mechanisms",
+  "Mixture-of-Experts (MoE): routing strategies, expert balancing, DeepSeekMoE, Mixtral, JetMoE",
+  "Efficient attention mechanisms: FlashAttention-2/3, Ring Attention, Sliding Window Attention, Sparse Attention",
+  "Long-context architectures: Infini-Attention, LongRoPE, YaRN, Attention Sinks, memory-augmented transformers",
+  "Scaling laws and their limits: compute-optimal training, data-quality effects, model shape, and inference-time scaling",
+  "Emerging multimodal foundation model architectures",
+]
+
+  [[days.resources]]
+  name   = "Next-Generation Foundation Model Architectures"
+  detail = "Decay gates, the delta rule and state-space models, and why hybrids keep attention; Mamba-3, RWKV, xLSTM and Hyena on recall and throughput; MoE routing, load balancing and serving cost at frontier scale; FlashAttention-3 and 4, windowed and compressed sparse attention; RoPE scaling, engineered attention sinks and staged long-context training; scaling laws and where they stop holding; natively multimodal models"
+  kind   = "slides"
+  file   = "Slides/Day_1/01_Next_Generation_Architectures.pdf"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 1: Linear Attention and the Delta Rule"
+  detail = "Train a Gated DeltaNet and a same-size Transformer from scratch on TinyStories, compare their loss, decoding memory and copying, and implement the gated delta rule by hand against the library kernel. Needs an A100 GPU."
+  kind   = "lab"
+  file   = "Labs/Day_1/01_Linear_Attention_and_the_Delta_Rule.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Advanced_LLM_Research/blob/main/Labs/Day_1/01_Linear_Attention_and_the_Delta_Rule.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 2: Mixture of Experts Routing"
+  detail = "Build a top-k router and a sparse mixture-of-experts layer with the Switch load-balancing loss and the router z-loss, train with and without them, and read the same routing statistics off OLMoE-1B-7B. Needs an A100 GPU."
+  kind   = "lab"
+  file   = "Labs/Day_1/02_Mixture_of_Experts_Routing.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Advanced_LLM_Research/blob/main/Labs/Day_1/02_Mixture_of_Experts_Routing.ipynb"
+  status = "ready"
+
+[[days]]
+slug  = "day2"
+label = "Day 2"
+title = "Advanced Reasoning and Test-Time Compute"
+blurb = "Spending compute at inference: chains, trees and search, the reward models and exact verifiers that select among them, self-correction and planning, and how today's reasoning models are built."
+icon  = "ri-mind-map"
+topics = [
+  "Scaling reasoning with test-time compute",
+  "Chain-of-Thought evolution: Self-Consistency, Least-to-Most, Tree-of-Thought, Graph-of-Thought",
+  "Search-based reasoning, including best-of-N sampling, beam-style search, and Monte Carlo Tree Search where appropriate",
+  "Program-of-Thought and code-assisted reasoning",
+  "Mathematical reasoning and verification: symbolic reasoning, formal verification, and verifier-based evaluation",
+  "Iterative reasoning and self-correction methods, including Reflexion, Self-Refine, and Self-Discover, with analysis of when they fail",
+  "Process Reward Models (PRMs) vs. Outcome Reward Models (ORMs)",
+  "Deliberative reasoning and planning",
+  "Neural search and reasoning optimization",
+  "Comparative analysis of current reasoning-model paradigms, using public technical reports and reproducible evidence where available",
+]
+
+  [[days.resources]]
+  name   = "Advanced Reasoning and Test-Time Compute"
+  detail = "Why test-time compute scales log-linearly and why the verifier bounds it; Least-to-Most and Graph-of-Thought against chains and trees; best-of-N, beam-style search and MCTS; process versus outcome reward models; code execution, symbolic engines and Lean as exact checks; when Self-Refine, Reflexion and related loops help and when they fail; planning, neural search and the 2026 reasoning models"
+  kind   = "slides"
+  file   = "Slides/Day_2/01_Advanced_Reasoning_and_Test_Time_Compute.pdf"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 1: Reasoning with Prompting and Search"
+  detail = "Direct answers, chain-of-thought and self-consistency on GSM8K, and Tree-of-Thought search on Game of 24, with Qwen2.5-1.5B and an exact symbolic grader, ending in one table of accuracy against generated tokens. Runs on a T4 GPU."
+  kind   = "lab"
+  file   = "Labs/Day_2/01_Reasoning_with_Prompting_and_Search.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Advanced_LLM_Research/blob/main/Labs/Day_2/01_Reasoning_with_Prompting_and_Search.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 2: Test-Time Compute Scaling"
+  detail = "Majority voting, best-of-N, weighted best-of-N, beam search and diverse verifier tree search on MATH-500, guided by a 7B process reward model and plotted against the generation budget. Needs an A100 GPU with 80 GB."
+  kind   = "lab"
+  file   = "Labs/Day_2/02_Test_Time_Compute_Scaling.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Advanced_LLM_Research/blob/main/Labs/Day_2/02_Test_Time_Compute_Scaling.ipynb"
+  status = "ready"
+
+[[days]]
+slug  = "day3"
+label = "Day 3"
+title = "Advanced Alignment, Post-Training, and Synthetic Data"
+blurb = "The post-training stack after RLHF: preference and RL objectives, reward design and oversight, synthetic data and curation, self-improvement, continual updates and merging, and open pipelines end to end."
+icon  = "ri-scales-3-line"
+topics = [
+  "Post-training objectives and algorithms: RLHF, DPO, ORPO, IPO, KTO, SimPO, and GRPO-style reinforcement learning",
+  "Reinforcement Learning from AI Feedback (RLAIF)",
+  "Constitutional AI and scalable oversight",
+  "Process supervision and reward shaping",
+  "Synthetic data generation pipelines",
+  "Self-improving language models",
+  "Continual post-training and lifelong adaptation",
+  "Model merging and weight-space arithmetic",
+  "Data curation at foundation-model scale",
+  "Open-source post-training pipelines",
+]
+
+  [[days.resources]]
+  name   = "Advanced Alignment, Post-Training, and Synthetic Data"
+  detail = "IPO, SimPO, length-normalised DPO and GRPO variants on one map; why frontier recipes moved from offline preferences to on-policy RL with verifiers; reward design, over-optimisation and reward hacking; debate, weak-to-strong generalisation, critics and specifications; synthetic data pipelines and curation; self-improvement loops; continual updates, model merging and open post-training pipelines"
+  kind   = "slides"
+  file   = "Slides/Day_3/01_Alignment_Post_Training_and_Synthetic_Data.pdf"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 1: DPO from Scratch"
+  detail = "Preference-tune a tiny language model trained from scratch with the DPO loss: no reward model and no RL loop. Runs in seconds on a CPU."
+  kind   = "lab"
+  file   = "Labs/Day_3/01_DPO_TinyLM_Exercise.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Advanced_LLM_Research/blob/main/Labs/Day_3/01_DPO_TinyLM_Exercise.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 2: GRPO with Verifiable Rewards"
+  detail = "Post-train Qwen2.5-1.5B on GSM8K with GRPO, LoRA and three reward functions that check answers with code, measure accuracy and format rate before and after, and compute group-relative advantages by hand. Runs on a T4 GPU."
+  kind   = "lab"
+  file   = "Labs/Day_3/02_GRPO_with_Verifiable_Rewards.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Advanced_LLM_Research/blob/main/Labs/Day_3/02_GRPO_with_Verifiable_Rewards.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Optional: DPO from Scratch (Solution)"
+  detail = "The worked solution to Lab 1"
+  kind   = "lab"
+  file   = "Labs/Day_3/Optional/01_DPO_TinyLM_Solution.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Advanced_LLM_Research/blob/main/Labs/Day_3/Optional/01_DPO_TinyLM_Solution.ipynb"
+  status = "ready"
+
+[[days]]
+slug  = "day4"
+label = "Day 4"
+title = "Agentic Foundation Models and Memory Systems"
+blurb = "Agents as trained models rather than scaffolds: tools and the Model Context Protocol, memory architectures, multi-agent systems, world models, and how agents are evaluated and run safely."
+icon  = "ri-robot-line"
+topics = [
+  "Agent architectures beyond ReAct",
+  "Planning-first LLMs",
+  "Multi-agent collaboration patterns, communication protocols, coordination costs, and failure modes",
+  "Tool and context interoperability, including Model Context Protocol (MCP) concepts, trust boundaries, permissions, and security",
+  "Persistent memory architectures",
+  "Episodic, semantic, and procedural memory",
+  "Retrieval-memory hybrids",
+  "Tool learning and autonomous tool discovery",
+  "Tool-use training and evaluation: schema adherence, tool selection, argument correctness, execution feedback, and recovery",
+  "World models and environment interaction",
+  "Agent evaluation and benchmarking",
+  "Agent safety and operations: sandboxing, identity and authorization, human approval, audit trails, cost controls, and incident analysis",
+]
+
+  [[days.resources]]
+  name   = "Agentic Foundation Models and Memory Systems"
+  detail = "From plan-first scaffolds to RL-trained agentic models; tool use from schema and selection to execution feedback and recovery; the 2026 Model Context Protocol, its trust boundaries and its attacks; memory types, write policies and retrieval structures; when a multi-agent system pays for its coordination; world models and synthetic environments; reporting agent benchmarks; identity, approval, audit trails and cost controls"
+  kind   = "slides"
+  file   = "Slides/Day_4/01_Agentic_Foundation_Models_and_Memory.pdf"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 1: Tool Use and Its Evaluation"
+  detail = "Serve tools from a real MCP server, run a tool-calling agent, score it on BFCL for schema validity, tool selection, argument correctness and relevance detection, then fine-tune it with LoRA and measure reliability with pass^k. Runs on a T4 GPU."
+  kind   = "lab"
+  file   = "Labs/Day_4/01_Tool_Use_and_Its_Evaluation.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Advanced_LLM_Research/blob/main/Labs/Day_4/01_Tool_Use_and_Its_Evaluation.ipynb"
+  status = "ready"
+
+[[days]]
+slug  = "day5"
+label = "Day 5"
+title = "Emerging Research Frontiers in NLP"
+blurb = "Where the field is heading: small and efficient models, diffusion language models, parametric memory, hallucination and interpretability, judge models, and the open questions, ending with the capstone."
+icon  = "ri-rocket-line"
+topics = [
+  "Small Language Models (SLMs) and edge LLMs",
+  "Parametric memory, retrieval-free approaches, and memory-augmented networks, including their freshness and attribution limitations",
+  "Diffusion Language Models (DLMs)",
+  "Efficiency research: language model compression beyond quantization; speculative decoding, Medusa, Eagle, and token pruning",
+  "AI safety research: mechanistic interpretability, activation steering, sparse autoencoders (SAEs)",
+  "Hallucination theory and uncertainty estimation",
+  "Automated LLM evaluation and judge models",
+  "Open research challenges and future directions for foundation models",
+  "Survey of recent frontier models (current-generation GPT, Claude, Gemini, DeepSeek, Llama, Qwen, and Mistral systems, and emerging open-weight research)",
+]
+
+  [[days.resources]]
+  name   = "Emerging Research Frontiers in NLP"
+  detail = "What makes a small model strong and what limits it on a device; drafter-free speculation, pruning and low-rank methods judged by realised speedup; diffusion language models; parametric memory and its freshness and attribution limits; why stronger reasoners can hallucinate more, and how to estimate uncertainty; probes, sparse autoencoders and steering vectors; judges, reward models and leaderboards; the frontier models and open research questions"
+  kind   = "slides"
+  file   = "Slides/Day_5/01_Emerging_Research_Frontiers.pdf"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 1: Speculative Decoding with Medusa Heads"
+  detail = "Train three Medusa draft heads on a frozen Qwen2.5-1.5B, implement draft-and-verify decoding, and measure acceptance length and speedup against plain decoding and a separate draft model. Needs an A100 GPU with 40 GB."
+  kind   = "lab"
+  file   = "Labs/Day_5/01_Medusa_Speculative_Decoding.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Advanced_LLM_Research/blob/main/Labs/Day_5/01_Medusa_Speculative_Decoding.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Lab 2: Sparse Autoencoders and Activation Steering"
+  detail = "Train a sparse autoencoder on GPT-2 small's residual stream with SAELens, evaluate it against a published one, read its features, and steer generation with a feature and with a mean-difference vector. Needs an A100 GPU."
+  kind   = "lab"
+  file   = "Labs/Day_5/02_Activation_Steering_and_Sparse_Autoencoders.ipynb"
+  colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Advanced_LLM_Research/blob/main/Labs/Day_5/02_Activation_Steering_and_Sparse_Autoencoders.ipynb"
+  status = "ready"
+
+  [[days.resources]]
+  name   = "Capstone: End-to-End Enterprise LLM Project"
+  detail = "Fine-tune, evaluate and deploy an LLM for an enterprise use case, end to end"
+  kind   = "project"
+  status = "todo"
+
+# -----------------------------------------------------------------------------
+# Extra — optional material on its own page, available all week. There is none
+# yet, so the site has no Extra page and no Extra link. Add an [[extra]] block
+# to bring both back:
+#
+# [[extra]]
+# name   = "Reading List"
+# detail = "Papers behind each day's deck"
+# kind   = "reference"
+# file   = "Extra/Reading_List.pdf"
+# status = "ready"
+# -----------------------------------------------------------------------------

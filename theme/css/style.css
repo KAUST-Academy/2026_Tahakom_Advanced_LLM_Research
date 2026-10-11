@@ -766,7 +766,7 @@ h6 {
 }
 
 /* --------------------------------------------------------------
-# Course overview and day topics (added for this course; the rules
+# Course overview (added for this course; the rules
 # above are the template's, unchanged)
 -------------------------------------------------------------- */
 .overview-section {
@@ -803,29 +803,4 @@ h6 {
 
 .overview-list strong {
   color: var(--text-navy);
-}
-
-.topics-box {
-  background: var(--bg-white);
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
-  padding: 30px 35px 22px;
-}
-
-.topics-box h3 {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text-navy);
-  margin-bottom: 15px;
-}
-
-@media (min-width: 992px) {
-  .topics-list {
-    columns: 2;
-    column-gap: 48px;
-  }
-
-  .topics-list li {
-    break-inside: avoid;
-  }
 }

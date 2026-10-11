@@ -21,8 +21,8 @@ GitHub Pages and opened straight off a USB stick.
 
 This copy adds three optional things, all driven by course.toml. An [overview]
 table puts a "Course Overview" section on the home page (the summary, learning
-objectives, prerequisites and capstone of the syllabus). A day's `topics` list
-is shown in a box above its resource table. With no [[extra]] blocks there is
+objectives and prerequisites of the syllabus). `extra_title` and `extra_blurb`
+in [course] replace the Extra page's heading. With no [[extra]] blocks there is
 no Extra page and no Extra link in the nav, as on 2026_KAUST_Claude_Workshop.
 Without them the output is the template's, except that notebook buttons carry
 `download` (see resource_row).
@@ -237,22 +237,6 @@ def bullet_list(items: list[str], indent: str) -> str:
     return "\n".join(f"{indent}<li>{e(para(i))}</li>" for i in items)
 
 
-def topics_box(day: dict) -> str:
-    """The day's syllabus topics, above its resource table. Empty without `topics`."""
-    topics = day.get("topics", [])
-    if not topics:
-        return ""
-    return f"""    <div class="container mb-4 animate-up">
-      <div class="topics-box">
-        <h3>Topics</h3>
-        <ul class="overview-list topics-list">
-{bullet_list(topics, "          ")}
-        </ul>
-      </div>
-    </div>
-"""
-
-
 def overview_card(icon: str, title: str, body: str, cols: str, delay: str) -> str:
     return f"""          <div class="{cols} d-flex align-items-stretch mb-4 animate-up {delay}">
             <div class="icon-box overview-box w-100">
@@ -284,10 +268,6 @@ def overview(course: dict, ov: dict) -> str:
               </ul>"""
         cards.append(overview_card("ri-list-check-2", "Prerequisites", body,
                                    "col-lg-6", "delay-200"))
-    if ov.get("capstone"):
-        body = f"              <p>{e(para(ov['capstone']))}</p>"
-        cards.append(overview_card("ri-trophy-line", "Capstone Project", body,
-                                   "col-12", "delay-100"))
 
     summary = para(course.get("summary", ""))
     summary_html = f'\n          <div class="overview-summary">{e(summary)}</div>' if summary else ""
@@ -386,7 +366,7 @@ def render_day(course: dict, days: list[dict], day: dict, show_extra: bool = Tru
       </div>
     </div>
 
-{topics_box(day)}{resource_table(day.get('resources', []))}
+{resource_table(day.get('resources', []))}
   </main>
 
 {NAV_SCRIPT}
@@ -398,13 +378,15 @@ def render_day(course: dict, days: list[dict], day: dict, show_extra: bool = Tru
 
 
 def render_extra(course: dict, days: list[dict], extra: list[dict]) -> str:
-    return f"""{head('Extra - Additional Resources', remixicon=False)}
+    title = course.get("extra_title", "Extra Resources")
+    blurb = para(course.get("extra_blurb", "Additional materials and references shared during the course."))
+    return f"""{head(f'Extra - {title}', remixicon=False)}
 {header(days, 'extra')}
   <main id="main">
     <div class="breadcrumbs animate-up">
       <div class="container">
-        <h2>Extra Resources</h2>
-        <p>Additional materials and references shared during the course.</p>
+        <h2>{e(title)}</h2>
+        <p>{e(blurb)}</p>
       </div>
     </div>
 

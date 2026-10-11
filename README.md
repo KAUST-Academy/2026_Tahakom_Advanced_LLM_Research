@@ -15,7 +15,10 @@ models and interpretability. The dates are not fixed yet.
 | 2 | Advanced Reasoning and Test-Time Compute | Reasoning with prompting and search; test-time compute scaling |
 | 3 | Advanced Alignment, Post-Training, and Synthetic Data | DPO from scratch; GRPO with verifiable rewards |
 | 4 | Agentic Foundation Models and Memory Systems | Tool use and its evaluation |
-| 5 | Emerging Research Frontiers in NLP | Medusa speculative decoding; sparse autoencoders and steering; the capstone |
+| 5 | Emerging Research Frontiers in NLP | Medusa speculative decoding; sparse autoencoders and steering |
+
+The **Extra** page holds the prerequisite reading: 19 decks from the same library
+that teach the background the five decks assume.
 
 Generated from
 [`Course_Website_Template`](https://github.com/KAUST-Academy/Course_Website_Template).
@@ -42,6 +45,8 @@ first, then copy it here.
 | `Slides/Day_5/01_Emerging_Research_Frontiers.pdf` | `Lectures/Natural_Language_Processing/30_Emerging_Research_Frontiers.pdf` |
 | `Labs/Day_N/NN_<Name>.ipynb` | `Labs/Natural_Language_Processing/<Name>.ipynb` |
 | `Labs/Day_3/01_DPO_TinyLM_Exercise.ipynb`, `Labs/Day_3/Optional/01_DPO_TinyLM_Solution.ipynb` | `Labs/Reinforcement_Learning/DPO_TinyLM_Exercise.ipynb`, `..._Solution.ipynb` |
+| `Extra/NLP_NN_<Name>.pdf` | `Lectures/Natural_Language_Processing/NN_<Name>.pdf` |
+| `Extra/RL_NN_<Name>.pdf` | `Lectures/Reinforcement_Learning/NN_<Name>.pdf` |
 
 Files are numbered in teaching order within each day, and each day's labs follow
 the order of its deck. Optional material is listed on its day's page, marked
@@ -49,8 +54,10 @@ the order of its deck. Optional material is listed on its day's page, marked
 
 The decks start where an advanced NLP course ends: each lists the background it
 assumes on a *Prerequisite knowledge* line of its learning outcomes slide, and
-does not teach it again. The capstone row on Day 5 reads *Coming soon* until its
-brief is added.
+does not teach it again. `Extra/` holds the library decks that teach that
+background (NLP 06 to 19 and 23 to 25, RL 04 and 08), listed in the library's
+teaching order with the days each one prepares for. When those lines change,
+check this list against them.
 
 Adding or replacing a file is: drop it in, add or update its entry in
 [`course.toml`](course.toml), run `python3 build.py --check`, commit, push.
@@ -64,10 +71,10 @@ optional, and without them the output is the template's:
 
 - **`[overview]`** in `course.toml` puts a *Course Overview* section on the home
   page, under the schedule: the course `summary`, then the syllabus's learning
-  objectives, prerequisites (`[[overview.prerequisites]]`, a `topic` and a
-  `detail` each) and capstone. The template defines `summary` but never shows it.
-- **`topics`** on a day, a list of strings, is shown in a *Topics* box above the
-  day's resource table. Here it holds that day's syllabus.
+  objectives and prerequisites (`[[overview.prerequisites]]`, a `topic` and a
+  `detail` each). The template defines `summary` but never shows it.
+- **`extra_title` and `extra_blurb`** in `[course]` replace the Extra page's
+  heading and the line under it; here they call it *Prerequisite Reading*.
 - **No Extra page when there is no `[[extra]]` block**, and no Extra link in
   the nav, as on the
   [Claude Workshop](https://github.com/KAUST-Academy/2026_KAUST_Claude_Workshop)
@@ -75,7 +82,7 @@ optional, and without them the output is the template's:
 - **Notebook buttons carry `download`**, as on the other Tahakom sites, because
   GitHub Pages serves `.ipynb` as raw JSON.
 
-The CSS for the overview and the topics box is appended to the end of
+The CSS for the overview is appended to the end of
 [`theme/css/style.css`](theme/css/style.css), after the template's own rules,
 which are unchanged.
 
@@ -87,17 +94,17 @@ The rest of this file is the template's manual.
 
 ```
 .
-├── course.toml                 # ALL content: overview, days, topics, resources. The only file most people touch.
+├── course.toml                 # ALL content: overview, days, resources, reading. The only file most people touch.
 ├── build.py                    # the generator. Standard library only — no pip install.
 ├── requirements.txt            # the lab environment students install
 ├── OFFLINE.md                  # classroom delivery runbook (no internet)
 ├── theme/                      # the KAUST Academy theme. Copied to _site/assets/.
-│   ├── css/style.css           #   the template's stylesheet, plus the overview and topics rules at the end
+│   ├── css/style.css           #   the template's stylesheet, plus the overview rules at the end
 │   ├── img/                    #   logo
 │   └── vendor/                 #   bootstrap + the two icon fonts the markup uses
 ├── Slides/Day_N/               # lecture PDFs, committed
 ├── Labs/Day_N/                 # Jupyter notebooks, committed; Optional/ holds extension labs
-├── Extra/                      # optional references
+├── Extra/                      # prerequisite reading: library decks, committed
 ├── _site/                      # BUILT OUTPUT — git-ignored, never commit
 ├── dist/                       # offline bundles — git-ignored, never commit
 └── .github/workflows/pages.yml # build + link-check on every push and PR; deploy when enabled
@@ -242,7 +249,7 @@ grep '^\.ri-flask-line:before' theme/vendor/remixicon/remixicon.css
 ### Changing the look
 
 `theme/css/style.css`: the template's stylesheet, byte for byte, followed by the
-overview and topics rules. Brand colours are custom properties at the top:
+overview rules. Brand colours are custom properties at the top:
 
 ```css
 --primary-navy: #00264c;  --accent-orange: #f0b500;  --accent-teal: #1bc5c9;

@@ -36,13 +36,17 @@ repo         = "KAUST-Academy/2026_Tahakom_Advanced_LLM_Research"
 license      = "GPL-3.0"
 license_note = "Recording and uploading lectures online is not permitted."
 
+# Heading of the Extra page, which holds the prerequisite reading.
+extra_title = "Prerequisite Reading"
+extra_blurb = "The decks that teach the background each day's lecture builds on. Read them before the course, in this order; each says which days it prepares for."
+
 # Shown under the "Course Overview" heading on the home page.
 summary = """
-Five days, each built around one lecture deck and one or two hands-on labs,
-ending with an end-to-end enterprise capstone. The decks start where an advanced
-NLP course ends, and each lists the background it assumes on its learning
-outcomes slide. Five of the nine labs need an A100 GPU; the others run on a T4
-or a CPU.
+Five days, each built around one lecture deck and one or two hands-on labs. The
+decks start where an advanced NLP course ends, and each lists the background it
+assumes on its learning outcomes slide; the Extra page has the decks that teach
+that background, to read beforehand. Five of the nine labs need an A100 GPU; the
+others run on a T4 or a CPU.
 """
 
 # -----------------------------------------------------------------------------
@@ -62,12 +66,7 @@ objectives = [
   "Investigate efficiency frontiers, including speculative decoding, model compression and small language models",
   "Apply mechanistic interpretability and uncertainty estimation methods to safety and hallucination research",
   "Assess the current frontier model landscape and formulate open research questions and future directions",
-  "Deliver an end-to-end enterprise LLM capstone spanning fine-tuning, evaluation and deployment",
 ]
-capstone = """
-The course concludes with an end-to-end enterprise LLM capstone project covering
-fine-tuning, evaluation and deployment.
-"""
 
   [[overview.prerequisites]]
   topic  = "Programming"
@@ -92,7 +91,6 @@ fine-tuning, evaluation and deployment.
 # -----------------------------------------------------------------------------
 # Days
 #
-# `topics` is the day's syllabus, shown in a box above its resource table.
 # Labs are numbered in the order they are run; rows marked "Optional" are
 # extension material. Each lab row says what GPU it needs.
 #
@@ -105,15 +103,6 @@ label = "Day 1"
 title = "Next-Generation Foundation Model Architectures"
 blurb = "What is replacing, sparsifying and stretching the transformer: state-space models, linear attention and hybrids, mixture of experts, efficient and long-context attention, scaling laws and multimodal designs."
 icon  = "ri-stack-line"
-topics = [
-  "Evolution beyond Transformers: Mamba, Mamba-2, RWKV, Hyena, xLSTM, and hybrid architectures",
-  "State-space models (SSMs) and linear attention mechanisms",
-  "Mixture-of-Experts (MoE): routing strategies, expert balancing, DeepSeekMoE, Mixtral, JetMoE",
-  "Efficient attention mechanisms: FlashAttention-2/3, Ring Attention, Sliding Window Attention, Sparse Attention",
-  "Long-context architectures: Infini-Attention, LongRoPE, YaRN, Attention Sinks, memory-augmented transformers",
-  "Scaling laws and their limits: compute-optimal training, data-quality effects, model shape, and inference-time scaling",
-  "Emerging multimodal foundation model architectures",
-]
 
   [[days.resources]]
   name   = "Next-Generation Foundation Model Architectures"
@@ -144,18 +133,6 @@ label = "Day 2"
 title = "Advanced Reasoning and Test-Time Compute"
 blurb = "Spending compute at inference: chains, trees and search, the reward models and exact verifiers that select among them, self-correction and planning, and how today's reasoning models are built."
 icon  = "ri-mind-map"
-topics = [
-  "Scaling reasoning with test-time compute",
-  "Chain-of-Thought evolution: Self-Consistency, Least-to-Most, Tree-of-Thought, Graph-of-Thought",
-  "Search-based reasoning, including best-of-N sampling, beam-style search, and Monte Carlo Tree Search where appropriate",
-  "Program-of-Thought and code-assisted reasoning",
-  "Mathematical reasoning and verification: symbolic reasoning, formal verification, and verifier-based evaluation",
-  "Iterative reasoning and self-correction methods, including Reflexion, Self-Refine, and Self-Discover, with analysis of when they fail",
-  "Process Reward Models (PRMs) vs. Outcome Reward Models (ORMs)",
-  "Deliberative reasoning and planning",
-  "Neural search and reasoning optimization",
-  "Comparative analysis of current reasoning-model paradigms, using public technical reports and reproducible evidence where available",
-]
 
   [[days.resources]]
   name   = "Advanced Reasoning and Test-Time Compute"
@@ -186,18 +163,6 @@ label = "Day 3"
 title = "Advanced Alignment, Post-Training, and Synthetic Data"
 blurb = "The post-training stack after RLHF: preference and RL objectives, reward design and oversight, synthetic data and curation, self-improvement, continual updates and merging, and open pipelines end to end."
 icon  = "ri-scales-3-line"
-topics = [
-  "Post-training objectives and algorithms: RLHF, DPO, ORPO, IPO, KTO, SimPO, and GRPO-style reinforcement learning",
-  "Reinforcement Learning from AI Feedback (RLAIF)",
-  "Constitutional AI and scalable oversight",
-  "Process supervision and reward shaping",
-  "Synthetic data generation pipelines",
-  "Self-improving language models",
-  "Continual post-training and lifelong adaptation",
-  "Model merging and weight-space arithmetic",
-  "Data curation at foundation-model scale",
-  "Open-source post-training pipelines",
-]
 
   [[days.resources]]
   name   = "Advanced Alignment, Post-Training, and Synthetic Data"
@@ -236,20 +201,6 @@ label = "Day 4"
 title = "Agentic Foundation Models and Memory Systems"
 blurb = "Agents as trained models rather than scaffolds: tools and the Model Context Protocol, memory architectures, multi-agent systems, world models, and how agents are evaluated and run safely."
 icon  = "ri-robot-line"
-topics = [
-  "Agent architectures beyond ReAct",
-  "Planning-first LLMs",
-  "Multi-agent collaboration patterns, communication protocols, coordination costs, and failure modes",
-  "Tool and context interoperability, including Model Context Protocol (MCP) concepts, trust boundaries, permissions, and security",
-  "Persistent memory architectures",
-  "Episodic, semantic, and procedural memory",
-  "Retrieval-memory hybrids",
-  "Tool learning and autonomous tool discovery",
-  "Tool-use training and evaluation: schema adherence, tool selection, argument correctness, execution feedback, and recovery",
-  "World models and environment interaction",
-  "Agent evaluation and benchmarking",
-  "Agent safety and operations: sandboxing, identity and authorization, human approval, audit trails, cost controls, and incident analysis",
-]
 
   [[days.resources]]
   name   = "Agentic Foundation Models and Memory Systems"
@@ -270,19 +221,8 @@ topics = [
 slug  = "day5"
 label = "Day 5"
 title = "Emerging Research Frontiers in NLP"
-blurb = "Where the field is heading: small and efficient models, diffusion language models, parametric memory, hallucination and interpretability, judge models, and the open questions, ending with the capstone."
+blurb = "Where the field is heading: small and efficient models, diffusion language models, parametric memory, hallucination and interpretability, judge models, and the open questions."
 icon  = "ri-rocket-line"
-topics = [
-  "Small Language Models (SLMs) and edge LLMs",
-  "Parametric memory, retrieval-free approaches, and memory-augmented networks, including their freshness and attribution limitations",
-  "Diffusion Language Models (DLMs)",
-  "Efficiency research: language model compression beyond quantization; speculative decoding, Medusa, Eagle, and token pruning",
-  "AI safety research: mechanistic interpretability, activation steering, sparse autoencoders (SAEs)",
-  "Hallucination theory and uncertainty estimation",
-  "Automated LLM evaluation and judge models",
-  "Open research challenges and future directions for foundation models",
-  "Survey of recent frontier models (current-generation GPT, Claude, Gemini, DeepSeek, Llama, Qwen, and Mistral systems, and emerging open-weight research)",
-]
 
   [[days.resources]]
   name   = "Emerging Research Frontiers in NLP"
@@ -307,21 +247,144 @@ topics = [
   colab  = "https://colab.research.google.com/github/KAUST-Academy/2026_Tahakom_Advanced_LLM_Research/blob/main/Labs/Day_5/02_Activation_Steering_and_Sparse_Autoencoders.ipynb"
   status = "ready"
 
-  [[days.resources]]
-  name   = "Capstone: End-to-End Enterprise LLM Project"
-  detail = "Fine-tune, evaluate and deploy an LLM for an enterprise use case, end to end"
-  kind   = "project"
-  status = "todo"
+# -----------------------------------------------------------------------------
+# Extra — prerequisite reading. Each day's deck lists the background it assumes
+# on a "Prerequisite knowledge" line of its learning outcomes slide; these are
+# the KAUST Academy decks that teach it (NLP and RL decks of
+# Artificial-Intelligence-Courses, file names prefixed with their course and
+# number). Listed in the library's teaching order, which is the order to read
+# them in; each says which days it prepares for.
+# -----------------------------------------------------------------------------
 
-# -----------------------------------------------------------------------------
-# Extra — optional material on its own page, available all week. There is none
-# yet, so the site has no Extra page and no Extra link. Add an [[extra]] block
-# to bring both back:
-#
-# [[extra]]
-# name   = "Reading List"
-# detail = "Papers behind each day's deck"
-# kind   = "reference"
-# file   = "Extra/Reading_List.pdf"
-# status = "ready"
-# -----------------------------------------------------------------------------
+[[extra]]
+name   = "Introduction to Transformers"
+detail = "Before Day 1: transformer internals, attention, positional encodings including RoPE, and the normalization choices modern models make"
+kind   = "reading"
+file   = "Extra/NLP_06_Transformers.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Large Language Models"
+detail = "Before Days 1 and 2: pre-training large language models, and the Kaplan and Chinchilla scaling laws"
+kind   = "reading"
+file   = "Extra/NLP_07_Large_Language_Models.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Fine-Tuning LLMs and RLHF"
+detail = "Before Day 3: the RLHF pipeline and Bradley-Terry reward models, PPO, DPO, ORPO and KTO, RLAIF and Constitutional AI, LoRA, catastrophic forgetting, and model merging with task vectors"
+kind   = "reading"
+file   = "Extra/NLP_08_Fine_Tuning_LLMs_and_RLHF.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Prompting and Retrieval-Augmented Generation"
+detail = "Before Days 2 and 4: chain-of-thought and self-consistency prompting, program-aided reasoning, and retrieval-augmented generation"
+kind   = "reading"
+file   = "Extra/NLP_09_Prompting_and_RAG.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Multimodal Natural Language Processing"
+detail = "Before Day 1: how vision and language models are combined, and the fusion patterns they use"
+kind   = "reading"
+file   = "Extra/NLP_10_Multimodal_NLP.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Agentic AI"
+detail = "Before Day 4: the ReAct loop, function calling, the Model Context Protocol, and pass@k for agents"
+kind   = "reading"
+file   = "Extra/NLP_11_Agentic_AI.pdf"
+status = "ready"
+
+[[extra]]
+name   = "AI Safety for Agents"
+detail = "Before Day 4: prompt injection, least privilege, sandboxing, approval gates and CaMeL"
+kind   = "reading"
+file   = "Extra/NLP_12_AI_Safety_for_Agents.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Mixture of Experts Models"
+detail = "Before Days 1 and 5: MoE routing, load balancing and expert parallelism"
+kind   = "reading"
+file   = "Extra/NLP_13_Mixture_of_Experts.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Large Reasoning Models"
+detail = "Before Day 2: chain-of-thought, self-consistency and Tree-of-Thought, DeepSeek-R1, test-time compute, overthinking, the Illusion of Thinking and unfaithful reasoning traces"
+kind   = "reading"
+file   = "Extra/NLP_14_Large_Reasoning_Models.pdf"
+status = "ready"
+
+[[extra]]
+name   = "RL Post-Training for Reasoning: GRPO and GSPO"
+detail = "Before Days 2, 3 and 5: GRPO and GSPO, RL with verifiable rewards, process and outcome reward models, and the DeepSeek-R1 pipeline"
+kind   = "reading"
+file   = "Extra/NLP_15_RL_Post_Training_GRPO_and_GSPO.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Transformers: 2017 vs 2026"
+detail = "Before Days 1 and 5: FlashAttention, grouped-query and sliding-window attention, the KV cache, and Mamba"
+kind   = "reading"
+file   = "Extra/NLP_16_Transformers_2017_vs_2026.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Inference Optimisation for Large Models"
+detail = "Before Days 3 and 5: speculative decoding, KV caching, quantization, pruning and knowledge distillation"
+kind   = "reading"
+file   = "Extra/NLP_17_Inference_Optimisation.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Recent Advancements in NLP"
+detail = "Before Day 5: masked diffusion language models such as LLaDA"
+kind   = "reading"
+file   = "Extra/NLP_18_Recent_Advancements_in_NLP.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Long-Context Modeling"
+detail = "Before Days 1, 4 and 5: linear attention and the delta rule (Gated DeltaNet), Mamba, block-sparse attention (NSA, DSA), attention sinks, segment recurrence and memory-augmented models such as Titans, effective-context benchmarks, Self-Route, prompt compression and KV-cache eviction"
+kind   = "reading"
+file   = "Extra/NLP_19_Long_Context_Modeling.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Evaluating Large Language Models"
+detail = "Before Days 2 to 5: pass@k, LLM-as-a-judge and its biases, Chatbot Arena, and benchmark contamination"
+kind   = "reading"
+file   = "Extra/NLP_23_LLM_Evaluation.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Distributed Training and Serving"
+detail = "Before Day 1: Ring Attention and expert parallelism"
+kind   = "reading"
+file   = "Extra/NLP_24_Distributed_Training_and_Serving.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Security and Enterprise NLP"
+detail = "Before Days 3, 4 and 5: Constitutional Classifiers, fine-tuning attacks and the refusal direction, hallucination detection (semantic entropy, Chain-of-Verification), continued pre-training, GraphRAG and HippoRAG"
+kind   = "reading"
+file   = "Extra/NLP_25_Security_and_Enterprise_NLP.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Policy Optimization: Actor-Critic to PPO"
+detail = "Before Day 3: actor-critic methods and PPO with a value model, from the reinforcement learning side"
+kind   = "reading"
+file   = "Extra/RL_04_Policy_Optimization.pdf"
+status = "ready"
+
+[[extra]]
+name   = "Model-Based and Offline Reinforcement Learning"
+detail = "Before Day 4: model-based reinforcement learning, which world models for agents build on"
+kind   = "reading"
+file   = "Extra/RL_08_Model_Based_and_Offline_RL.pdf"
+status = "ready"
